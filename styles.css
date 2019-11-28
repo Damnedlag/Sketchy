@@ -1,0 +1,7 @@
+.container {
+    display: flex; /* or inline-flex */
+  }
+
+div {
+    border: black solid 1px;
+}
