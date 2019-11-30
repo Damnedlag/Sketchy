@@ -8,22 +8,52 @@
     <title>Sketchy</title>
 </head>
 <body>
+    <button id="resetButton" onclick="reset()">Click this to reset stuff</button>
     <div id="container"></div>
 
 <script>
 
 
 const container = document.getElementById("container");
+let gridSelection = 16;
 
-gridCreator = () => {
-    for (var i = 0; i <= 16; i++) {
-let div = document.createElement("div")
+gridCreator = (gridSelection) => {
+    for (var i = 1; i <= gridSelection; i++) {
+        let div = document.createElement("div")
 container.appendChild(div)
-div.textContent = "This is a div " + i
-}}
+document.getElementById("container").lastChild.id = i
+container.lastChild.classList.add("columns")
+//div.textContent = "This is a div " + i
+document.getElementById(i).style.display = "flex"
+        for (var p = 1; p <= gridSelection; p++) {
+let divindiv = document.createElement("div")
+divindiv.addEventListener("mouseenter", function() {
+            this.style.background = "black";
+})
+document.getElementById(i).appendChild(divindiv)
+document.getElementById(i).lastChild.classList.add("rowElements")
+//divindiv.textContent = "This is a div in div " + p
+}
+}} 
+
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+}
+
+reset = () => {
+    document.getElementsByClassName("columns").remove()
+    gridSelection = prompt("Choose number of grids", "16")
+    gridCreator(gridSelection)
+}
 
 gridCreator()
-
  
 
 </script>
